@@ -1,4 +1,4 @@
 class Campo:
-    # class variable
-    TamX = 80
-    TamY = 80
+    def __init__(self, tamX, tamY):
+        self.tamX = tamX
+        self.tamY = tamY
