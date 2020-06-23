@@ -1,3 +1,4 @@
 class Oveja:
-    # class variable
-    location = 2
+
+    def __init__(self, position):
+        self.position = position
