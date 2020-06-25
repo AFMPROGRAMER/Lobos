@@ -1,4 +1,7 @@
-class Seto:
+from Entities.SerVivo import SerVivo
 
-    def __init__(self, position):
-        self.position = position
+
+class Seto(SerVivo):
+
+    def __init__(self, x, y):
+        SerVivo.__init__(x, y, (0, 255, 0))

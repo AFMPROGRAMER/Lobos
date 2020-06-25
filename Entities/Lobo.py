@@ -1,7 +1,7 @@
-class Lobo:
+from Entities.SerVivo import SerVivo
 
-    def __init__(self, position):
-        self.position = position
 
-    def mover(self):
-        return self.position.moverN()
+class Lobo(SerVivo):
+
+    def __init__(self, x,y):
+        SerVivo.__init__(x, y, (128, 128, 128))
