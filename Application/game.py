@@ -1,4 +1,3 @@
-import numpy as np
 import time
 
 from Application.auxFunctions import generateStartCreatures

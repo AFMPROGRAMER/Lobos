@@ -1,5 +1,3 @@
-from Entities.position import Position
-
 
 class Creatures:
 
