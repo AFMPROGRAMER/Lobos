@@ -1,4 +1,6 @@
+from Entities.hedge import Hedge
 from Entities.position import Position
+from Entities.wolf import Wolf
 
 
 class Land:
@@ -44,6 +46,7 @@ class Land:
     @fallow.setter
     def fallow(self, fallow):
         self.__fallow = fallow
+
     # endregion
 
     # region Creature Functions
@@ -75,6 +78,28 @@ class Land:
             self.fallow[x][y] = 0
             res = True
         return res
+
+    def getAllCreatureType(self, creatureType):
+        allCreatureType = []
+        for creature in self.creatures:
+            if isinstance(creature, creatureType):
+                allCreatureType.append(creature)
+        return allCreatureType
+
+    def getAllHedge(self):
+        return self.getAllCreatureType(Hedge)
+
+    def getAllWolf(self):
+        return self.getAllCreatureType(Wolf)
+
+    def findNear(self, position, creatureType):
+        near = None
+        for creature in self.getAllCreatureType(creatureType):
+            if near is None:
+                near = position
+            if near.position > creature.position:
+                near = creature
+        return near
 
     # endregion
 

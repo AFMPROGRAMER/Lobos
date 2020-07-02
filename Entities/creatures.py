@@ -23,5 +23,5 @@ class Creatures:
     def showPosition(self):
         return str(self.position.x) + ":" + str(self.position.y)
 
-    def move(self):
+    def move(self, land):
         return self.position
