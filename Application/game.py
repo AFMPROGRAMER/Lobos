@@ -21,15 +21,17 @@ while True:
     # TODO: Llamar al metodo pintar pantalla
     time.sleep(0.1)
     # Recorremos la lista de seres vivos
+    count = 0
     for creature in campo.creatures:
-        print(creature.showPosition())
+        count += 1
+
         # TODO: usar isinstance(a,TYPE) para saber de que ser vivo se trata
         if isinstance(creature, Hedge):
-            print("Es un seto")
+            print("Critura " + str(count) + ": Es un seto, en la posicion: " + creature.showPosition())
         elif isinstance(creature, Sheep):
-            print("Es una oveja")
+            print("Critura " + str(count) + ":Es una oveja, en la posicion: " + creature.showPosition())
         elif isinstance(creature, Wolf):
-            print("Es un lobo")
+            print("Critura " + str(count) + ":Es un lobo, en la posicion: " + creature.showPosition())
         else:
-            print("No se que es")
+            print("Critura " + str(count) + ":No se que es, en la posicion: " + creature.showPosition())
 

@@ -1,4 +1,3 @@
-
 class Creatures:
 
     def __init__(self, position, color=None):
@@ -11,16 +10,18 @@ class Creatures:
     @property
     def color(self):
         return self.color
+
     # endregion
 
     # region setters
     @color.setter
     def color(self, color):
         self.__color = color
+
     # endregion
 
     def showPosition(self):
-        return self.position
+        return str(self.position.x) + ":" + str(self.position.y)
 
     def move(self):
         return self.position

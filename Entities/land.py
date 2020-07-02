@@ -84,17 +84,17 @@ class Land:
     def getEmptySpace(self):
         posx = 0
         posy = 0
-        find = False
+        find = True
 
-        while (posx < self.tamX or posy < self.tamY) and not find:
+        while (posx < self.tamX or posy < self.tamY) and find:
             find = self.existCreature(posx, posy)
-            if not find:
+            if find:
                 posx += 1
                 if posx >= self.tamX:
                     posy += 1
                     if posy < self.tamY:
                         posx = 0
-        if not find:
+        if find:
             pos = None
         else:
             pos = Position(posx, posy)
