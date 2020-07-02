@@ -1,9 +1,9 @@
 import numpy as np
 import time
 
+from Application.auxFunctions import generateStartCreatures
 from Entities.hedge import Hedge
 from Entities.land import Land
-from Entities.position import Position
 from Entities.sheep import Sheep
 from Entities.wolf import Wolf
 
@@ -12,19 +12,14 @@ nyC = 80
 
 campo = Land(nxC, nyC)
 
-#Inicializar los seres vivos en el tablero
-seto1 = Hedge(Position(0, 0))
-oveja1 = Sheep(Position(1, 1))
-lobo1 = Wolf(Position(2, 2))
-campo.addCreature(seto1)
-campo.addCreature(oveja1)
-campo.addCreature(lobo1)
+# Inicializar los seres vivos en el tablero
+generateStartCreatures(campo)
 
-#Bucle principal
+# Bucle principal
 
 while True:
 
-    #TODO: Llamar al metodo pintar pantalla
+    # TODO: Llamar al metodo pintar pantalla
     time.sleep(0.1)
     # Recorremos la lista de seres vivos
     for creature in campo.creatures:
@@ -38,3 +33,4 @@ while True:
             print("Es un lobo")
         else:
             print("No se que es")
+
