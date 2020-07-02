@@ -19,7 +19,7 @@ def generateStartCreatures(land):
             elif creatureType == 1:
                 creature = Sheep(position)
             # Lobo
-            elif creatureType == 1:
+            elif creatureType == 2:
                 creature = Wolf(position)
             else:
                 creature = None
