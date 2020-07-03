@@ -54,7 +54,7 @@ class Land:
         return self.__creatures.append(creature)
 
     def killCreature(self, creature):
-        return self.__creatures.pop(creature)
+        return self.__creatures.remove(creature)
 
     def existCreature(self, x, y):
         find = False
@@ -71,6 +71,8 @@ class Land:
 
         return find
 
+    # region Creature Functions
+
     # region Hedge Functions
     def footPrint(self, x, y):
         res = False
@@ -78,6 +80,7 @@ class Land:
             self.fallow[x][y] = 0
             res = True
         return res
+    # endregion
 
     def getAllCreatureType(self, creatureType):
         allCreatureType = []
@@ -101,28 +104,14 @@ class Land:
                 near = creature
         return near
 
-    # endregion
+    def getAllCreatureTypeInPosition(self, creatureType, position):
+        listCreatureType = self.getAllCreatureType(creatureType)
+        listAux = listCreatureType[:]
+        count = 0
+        for creature in listCreatureType:
+            if creature.position != position:
+                listAux.pop()
+            count += 1
 
-    # endregion
-
-    # region Position Functions
-    def getEmptySpace(self):
-        posx = 0
-        posy = 0
-        find = True
-
-        while (posx < self.tamX or posy < self.tamY) and find:
-            find = self.existCreature(posx, posy)
-            if find:
-                posx += 1
-                if posx >= self.tamX:
-                    posy += 1
-                    if posy < self.tamY:
-                        posx = 0
-        if find:
-            pos = None
-        else:
-            pos = Position(posx, posy)
-
-        return pos
+        return listAux
     # endregion
