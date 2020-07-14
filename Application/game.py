@@ -1,26 +1,30 @@
 import time
-import config
 
+import config
 from Application.auxFunctions import generateStartCreatures, generateHedge
 from Entities.hedge import Hedge
 from Entities.land import Land
 from Entities.sheep import Sheep
 from Entities.wolf import Wolf
+from view.Viewservice import ViewService
 
 nxC = config.MAX_X
 nyC = config.MAX_Y
 
 campo = Land(nxC, nyC)
+vs = ViewService(nxC, nyC)
 
 # Inicializar los seres vivos en el tablero
 generateStartCreatures(campo)
-
 # Bucle principal
-
-while True:
+iteration = 0
+while iteration < config.MAX_ITERATIONS:
 
     # TODO: Llamar al metodo pintar pantalla
-    time.sleep(0.1)
+    for creature in campo.creatures:
+        vs.draw_entity(creature)
+    vs.print_window()
+    time.sleep(5)
     # Recorremos la lista de seres vivos
     count = 0
     # mover
@@ -29,7 +33,7 @@ while True:
 
         if isinstance(creature, Hedge):
             # Los setos no se mueven
-            print("Criatura " + str(count) + ": Es un seto, en la posicion: " + creature.showPosition())
+            print("Criatura " + str(count) + ":Es un seto, en la posicion: " + creature.showPosition())
         elif isinstance(creature, Sheep):
             print("Criatura " + str(count) + ":Es una oveja, en la posicion: " + creature.showPosition())
         elif isinstance(creature, Wolf):
@@ -45,7 +49,7 @@ while True:
         count += 1
         if isinstance(creature, Hedge):
             # Los setos no comen
-            print("Criatura " + str(count) + ": Es un seto, en la posicion: " + creature.showPosition())
+            print("Criatura " + str(count) + ":Es un seto, en la posicion: " + creature.showPosition())
         elif isinstance(creature, Sheep):
             print("Criatura " + str(count) + ":Es una oveja, en la posicion: " + creature.showPosition())
         elif isinstance(creature, Wolf):
@@ -56,3 +60,5 @@ while True:
 
     # generamos setos
     generateHedge(campo)
+
+    iteration += 1

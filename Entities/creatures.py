@@ -1,6 +1,7 @@
-import random
-import config
 import copy
+import random
+
+import config
 
 
 class Creatures:
@@ -16,15 +17,16 @@ class Creatures:
     # region getters
     @property
     def color(self):
-        return self.color
+        return self.__color
 
     @property
     def life(self):
-        return self.life
+        return self.__life
 
     @property
     def foodType(self):
-        return self.foodType
+        return self.__foodType
+
     # endregion
 
     # region setters
@@ -39,6 +41,7 @@ class Creatures:
     @foodType.setter
     def foodType(self, foodType):
         self.__foodType = foodType
+
     # endregion
 
     # region Move function
@@ -53,25 +56,26 @@ class Creatures:
         moveDo = random.randrange(8)
 
         if moveDo == 0:
-            pos = self.position.moveN()
+            pos = self.position.moveN(land)
         elif moveDo == 1:
-            pos = self.position.moveNE()
+            pos = self.position.moveNE(land)
         elif moveDo == 2:
-            pos = self.position.moveE()
+            pos = self.position.moveE(land)
         elif moveDo == 3:
-            pos = self.position.moveES()
+            pos = self.position.moveES(land)
         elif moveDo == 4:
-            pos = self.position.moveS()
+            pos = self.position.moveS(land)
         elif moveDo == 5:
-            pos = self.position.moveSO()
+            pos = self.position.moveSO(land)
         elif moveDo == 6:
-            pos = self.position.moveO()
+            pos = self.position.moveO(land)
         elif moveDo == 7:
-            pos = self.position.moveON()
+            pos = self.position.moveON(land)
 
         land.footPrint(pos.x, pos.y)
-
+        self.position = pos
         return pos
+
     # endregion
 
     # region Life Functions
@@ -82,7 +86,7 @@ class Creatures:
         return self.life
 
     def removeLife(self, land):
-        self.life -= 1
+        self.life = self.life - 1
         if self.life <= 0:
             land.killCreature(self)
         return self.life
@@ -105,4 +109,5 @@ class Creatures:
     def createChild(self):
         child = copy.deepcopy(self)
         child.life = config.MAX_LIFE
+        return child
     #  endregion

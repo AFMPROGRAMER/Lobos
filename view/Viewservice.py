@@ -1,5 +1,4 @@
 import os
-import time
 
 import pygame
 
@@ -40,9 +39,13 @@ class ViewService:
         self.screen.fill(bg)
 
     def draw_entity(self, entity):
-        # TODO
-        pass
-        # pygame.draw.polygon(self.screen, (128, 128, 128), poly, 1)
+        poly = [
+            (int(entity.position.x * WIDTH_CELL), int(entity.position.y * HEIGHT_CELL)),
+            (int((entity.position.x + 1) * WIDTH_CELL), int(entity.position.y * HEIGHT_CELL)),
+            (int((entity.position.x + 1) * WIDTH_CELL), int((entity.position.y + 1) * HEIGHT_CELL)),
+            (int(entity.position.x * WIDTH_CELL), int((entity.position.y + 1) * HEIGHT_CELL)),
+        ]
+        pygame.draw.polygon(self.screen, entity.color, poly, 1)
 
     def print_window(self):
         # Recorro cada una de las celdas generadas
@@ -63,10 +66,9 @@ class ViewService:
 
         pygame.draw.polygon(self.screen, (128, 128, 128), poly, 1)
 
-
-vs = ViewService(60, 60)
-# Agrego pequeña pausa para que el cpu no trabaje al 100%
-i = 0
-while i < 10000:
-    vs.print_window()
-    i = i + 1
+# vs = ViewService(60, 60)
+## Agrego pequeña pausa para que el cpu no trabaje al 100%
+# i = 0
+# while i < 10000:
+#    vs.print_window()
+#    i = i + 1

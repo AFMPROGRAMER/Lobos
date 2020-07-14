@@ -1,9 +1,10 @@
 from numpy import random
+
+import config
 from Entities.hedge import Hedge
 from Entities.position import Position
 from Entities.sheep import Sheep
 from Entities.wolf import Wolf
-import config
 
 
 def generateStartCreatures(land):
@@ -38,8 +39,10 @@ def generateHedge(land):
         y = 0
         for espacio in row:
             espacio += 1
+            land.incrementFallow(x, y)
             if espacio >= config.MAX_TIME_HEDGE:
                 creature = Hedge(Position(x, y))
                 land.addCreature(creature)
+                land.footPrint(x, y)
             y += 1
         x += 1

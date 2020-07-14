@@ -1,5 +1,4 @@
 from Entities.hedge import Hedge
-from Entities.position import Position
 from Entities.wolf import Wolf
 
 
@@ -9,7 +8,7 @@ class Land:
         self.tamY = tamY
         self.creatures = []
         # Inicializamos el historico de pisadas para ver cuando el seto tiene que generarse
-        self.fallow = [0] * tamX, [0] * tamY
+        self.fallow = [[0 for i in range(tamX)] for j in range(tamY)]
 
     # region getters
     @property
@@ -80,6 +79,14 @@ class Land:
             self.fallow[x][y] = 0
             res = True
         return res
+
+    def incrementFallow(self, x, y):
+        res = False
+        if x < self.tamX and y < self.tamY:
+            self.fallow[x][y] += 1
+            res = True
+        return res
+
     # endregion
 
     def getAllCreatureType(self, creatureType):
@@ -99,8 +106,8 @@ class Land:
         near = None
         for creature in self.getAllCreatureType(creatureType):
             if near is None:
-                near = position
-            if near.position > creature.position:
+                near = creature.position
+            if near.distance(position) > creature.position.distance(position):
                 near = creature
         return near
 
@@ -109,7 +116,7 @@ class Land:
         listAux = listCreatureType[:]
         count = 0
         for creature in listCreatureType:
-            if creature.position != position:
+            if (position is creature.position) | (creature.position.x != position.x & creature.position.y != position.y):
                 listAux.pop()
             count += 1
 
