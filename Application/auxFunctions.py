@@ -7,8 +7,8 @@ import config
 
 
 def generateStartCreatures(land):
-    # Generamos 10 animales aleatorios con posciones aleatorias
-    for i in range(0, 10):
+    # Generamos START_ANIMALS animales aleatorios con posciones aleatorias
+    for i in range(0, config.START_ANIMALS):
         creatureType = random.randint(3)
 
         creature = None
@@ -40,5 +40,6 @@ def generateHedge(land):
             espacio += 1
             if espacio >= config.MAX_TIME_HEDGE:
                 creature = Hedge(Position(x, y))
+                land.addCreature(creature)
             y += 1
         x += 1

@@ -31,7 +31,6 @@ while True:
             # Los setos no se mueven
             print("Criatura " + str(count) + ": Es un seto, en la posicion: " + creature.showPosition())
         elif isinstance(creature, Sheep):
-
             print("Criatura " + str(count) + ":Es una oveja, en la posicion: " + creature.showPosition())
         elif isinstance(creature, Wolf):
             print("Criatura " + str(count) + ":Es un lobo, en la posicion: " + creature.showPosition())
