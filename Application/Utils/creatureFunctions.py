@@ -8,23 +8,22 @@ from Entities.wolf import Wolf
 
 
 def generateStartCreatures(land):
-    # Generamos START_ANIMALS animales aleatorios con posciones aleatorias
+    # Generate random animal START_ANIMALS with random positions
     for i in range(0, config.START_ANIMALS):
         creatureType = random.randint(3)
 
         creature = None
-        # position = land.getEmptySpace()
         x = random.randint(0, config.MAX_X)
         y = random.randint(0, config.MAX_Y)
         position = Position(x, y)
-        # Seto
+        # Hedge
         if position is not None:
             if creatureType == 0:
                 creature = Hedge(position)
-            # Oveja
+            # Sheep
             elif creatureType == 1:
                 creature = Sheep(position)
-            # Lobo
+            # Wolf
             elif creatureType == 2:
                 creature = Wolf(position)
             else:
@@ -37,10 +36,10 @@ def generateHedge(land):
     x = 0
     for row in land.fallow:
         y = 0
-        for espacio in row:
-            espacio += 1
+        for position in row:
+            position += 1
             land.incrementFallow(x, y)
-            if espacio >= config.MAX_TIME_HEDGE:
+            if position >= config.MAX_TIME_HEDGE:
                 creature = Hedge(Position(x, y))
                 land.addCreature(creature)
                 land.footPrint(x, y)

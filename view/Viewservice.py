@@ -1,6 +1,7 @@
 import os
-
 import pygame
+
+import config
 
 # Alto y ancho por celda
 WIDTH_CELL = 10
@@ -34,9 +35,8 @@ class ViewService:
         # Creación de la ventana
         self.screen = pygame.display.set_mode((self.heightWindow, self.widthWindow))
 
-        bg = 25, 25, 25
         # Pinto el fondo con el color elegido (bg)
-        self.screen.fill(bg)
+        self.screen.fill(config.COLOR_FONT)
 
     def draw_entity(self, entity):
         poly = [
@@ -45,13 +45,17 @@ class ViewService:
             (int((entity.position.x + 1) * WIDTH_CELL), int((entity.position.y + 1) * HEIGHT_CELL)),
             (int(entity.position.x * WIDTH_CELL), int((entity.position.y + 1) * HEIGHT_CELL)),
         ]
-        pygame.draw.polygon(self.screen, entity.color, poly, 1)
+        pygame.draw.polygon(self.screen, entity.color, poly, 0)
 
-    def print_window(self):
+    def print_window(self, land):
         # Recorro cada una de las celdas generadas
         for y in range(0, self.width):
             for x in range(0, self.height):
-                self.draw_poly(x, y)
+                entity = land.getMostVisibleCreature(x, y)
+                if entity:
+                    self.draw_entity(entity)
+                else:
+                    self.draw_poly(x, y)
         # Muestro y actualizo los fotogramas en cada iteración del bucle principal
         pygame.display.flip()
 
@@ -65,10 +69,3 @@ class ViewService:
         ]
 
         pygame.draw.polygon(self.screen, (128, 128, 128), poly, 1)
-
-# vs = ViewService(60, 60)
-## Agrego pequeña pausa para que el cpu no trabaje al 100%
-# i = 0
-# while i < 10000:
-#    vs.print_window()
-#    i = i + 1

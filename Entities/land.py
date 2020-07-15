@@ -1,4 +1,5 @@
 from Entities.hedge import Hedge
+from Entities.sheep import Sheep
 from Entities.wolf import Wolf
 
 
@@ -7,7 +8,6 @@ class Land:
         self.tamX = tamX
         self.tamY = tamY
         self.creatures = []
-        # Inicializamos el historico de pisadas para ver cuando el seto tiene que generarse
         self.fallow = [[0 for i in range(tamX)] for j in range(tamY)]
 
     # region getters
@@ -67,8 +67,17 @@ class Land:
                     find = True
                 else:
                     cont += 1
-
         return find
+
+    def getMostVisibleCreature(self, x, y):
+        creature = None
+        for auxCreature in self.creatures:
+            if auxCreature.position.x == x and auxCreature.position.y == y:
+                if creature is None or (
+                        (isinstance(creature, Hedge) or isinstance(creature, Sheep)) and isinstance(auxCreature, Wolf)) or (
+                        isinstance(creature, Hedge) and isinstance(auxCreature, Sheep)):
+                    creature = auxCreature
+        return creature
 
     # region Creature Functions
 
@@ -116,7 +125,8 @@ class Land:
         listAux = listCreatureType[:]
         count = 0
         for creature in listCreatureType:
-            if (position is creature.position) | (creature.position.x != position.x & creature.position.y != position.y):
+            if (position is creature.position) | (
+                    creature.position.x != position.x & creature.position.y != position.y):
                 listAux.pop()
             count += 1
 
