@@ -80,9 +80,9 @@ class Creatures:
 
     # region Life Functions
     def addLife(self):
-        auxLife = self.life + 1
-        if auxLife <= config.MAX_LIFE:
-            self.life = auxLife
+        self.life = config.MAX_LIFE
+        # if auxLife <= config.MAX_LIFE:
+        #     self.life = auxLife
         return self.life
 
     def removeLife(self, land):
@@ -104,6 +104,7 @@ class Creatures:
             land.killCreature(cratureList[0])
             if random.random() <= config.PROBABILITY:
                 land.addCreature(self.createChild())
+            self.addLife()
             res = True
         return res
 
