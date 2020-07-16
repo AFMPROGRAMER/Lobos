@@ -1,8 +1,9 @@
-MAX_X = 20  # Dimesión x del tablero
-MAX_Y = 20  # Dimesión y del tablero
-MAX_LIFE = 10  # Número de movimientos antes de morir
-MAX_TIME_HEDGE = 3  # Número de iteraciones en barbecho
-START_ANIMALS = 10  # Número de animales que empiezan en el campo
-MAX_ITERATIONS = 100  # Número de iteraciones de movimientos
-DELAY_TIME = 0.1  # Tiempo entre iteraciones
+MAX_X = 20  # Dimension x of the board
+MAX_Y = 20  # Dimension y of the board
+MAX_LIFE = 10  # Number of movements before death
+MAX_TIME_HEDGE = 3  # Number of fallow iterations
+START_ANIMALS = 100  # Number of animals starting in the field
+MAX_ITERATIONS = 100  # Number of movement iterations
+DELAY_TIME = 100  # Time between iterations
 COLOR_FONT = 25, 25, 25
+PROBABILITY = 0.2  # Probability of creating a baby

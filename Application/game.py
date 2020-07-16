@@ -18,7 +18,8 @@ vs.print_window(land)
 iteration = 0
 while iteration < config.MAX_ITERATIONS:
 
-    time.sleep(config.DELAY_TIME)
+    # time.sleep(config.DELAY_TIME)
+    vs.wait(config.DELAY_TIME)
 
     # move
     for creature in land.creatures:
