@@ -40,8 +40,9 @@ def generateHedge(land):
             position += 1
             land.incrementFallow(x, y)
             if position >= config.MAX_TIME_HEDGE:
-                creature = Hedge(Position(x, y))
-                land.addCreature(creature)
+                if random.random() <= config.PROBABILITY:
+                    creature = Hedge(Position(x, y))
+                    land.addCreature(creature)
                 land.footPrint(x, y)
             y += 1
         x += 1

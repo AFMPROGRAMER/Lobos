@@ -102,7 +102,8 @@ class Creatures:
 
         if cratureList is not None and len(cratureList) > 0:
             land.killCreature(cratureList[0])
-            land.addCreature(self.createChild())
+            if random.random() <= config.PROBABILITY:
+                land.addCreature(self.createChild())
             res = True
         return res
 

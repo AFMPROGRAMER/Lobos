@@ -1,5 +1,3 @@
-import time
-
 import config
 from Application.Utils.creatureFunctions import generateStartCreatures, generateHedge
 from Entities.land import Land
@@ -18,7 +16,8 @@ vs.print_window(land)
 iteration = 0
 while iteration < config.MAX_ITERATIONS:
 
-    time.sleep(config.DELAY_TIME)
+    # time.sleep(config.DELAY_TIME)
+    vs.wait(config.DELAY_TIME)
 
     # move
     for creature in land.creatures:

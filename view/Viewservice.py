@@ -69,3 +69,7 @@ class ViewService:
         ]
 
         pygame.draw.polygon(self.screen, (128, 128, 128), poly, 1)
+
+    @staticmethod
+    def wait(miliseconds):
+        pygame.time.wait(miliseconds)
