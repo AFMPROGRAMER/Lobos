@@ -9,9 +9,12 @@ from Entities.wolf import Wolf
 
 def generateStartCreatures(land):
     # Generate random animal START_ANIMALS with random positions
+    existWolf = False
     for i in range(0, config.START_ANIMALS):
-        creatureType = random.randint(3)
-
+        if not existWolf:
+            creatureType = random.randint(3)
+        else:
+            creatureType = random.randint(2)
         creature = None
         x = random.randint(0, config.MAX_X)
         y = random.randint(0, config.MAX_Y)
@@ -26,6 +29,7 @@ def generateStartCreatures(land):
             # Wolf
             elif creatureType == 2:
                 creature = Wolf(position)
+                existWolf = True
             else:
                 creature = None
         if creature is not None:
