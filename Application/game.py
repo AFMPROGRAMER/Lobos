@@ -1,5 +1,3 @@
-import time
-
 import config
 from Application.Utils.creatureFunctions import generateStartCreatures, generateHedge
 from Entities.land import Land

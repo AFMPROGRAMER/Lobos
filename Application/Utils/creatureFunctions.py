@@ -43,7 +43,6 @@ def generateHedge(land):
                 if random.random() <= config.PROBABILITY:
                     creature = Hedge(Position(x, y))
                     land.addCreature(creature)
-                    land.footPrint(x, y)
                 land.footPrint(x, y)
             y += 1
         x += 1
