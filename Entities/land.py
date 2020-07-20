@@ -127,7 +127,7 @@ class Land:
         for creature in listCreatureType:
             if (position is creature.position) | (
                     creature.position.x != position.x & creature.position.y != position.y):
-                listAux.pop()
+                listAux.remove(creature)
             count += 1
 
         return listAux
