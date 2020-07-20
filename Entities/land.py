@@ -7,7 +7,7 @@ class Land:
     def __init__(self, tamX, tamY):
         self.tamX = tamX
         self.tamY = tamY
-        self.creatures = []
+        self.creatures = self.intializeCreaturesLand(tamX, tamY)
         self.fallow = [[0 for i in range(tamX)] for j in range(tamY)]
 
     # region getters
@@ -50,10 +50,10 @@ class Land:
 
     # region Creature Functions
     def addCreature(self, creature):
-        return self.__creatures.append(creature)
+        return self.__creatures[self.getKey(creature.position.x, creature.position.y)].append(creature)
 
     def killCreature(self, creature):
-        return self.__creatures.remove(creature)
+        return self.__creatures[self.getKey(creature.position.x, creature.position.y)].remove(creature)
 
     def existCreature(self, x, y):
         find = False
@@ -71,12 +71,14 @@ class Land:
 
     def getMostVisibleCreature(self, x, y):
         creature = None
-        for auxCreature in self.creatures:
-            if auxCreature.position.x == x and auxCreature.position.y == y:
-                if creature is None or (
-                        (isinstance(creature, Hedge) or isinstance(creature, Sheep)) and isinstance(auxCreature, Wolf)) or (
-                        isinstance(creature, Hedge) and isinstance(auxCreature, Sheep)):
-                    creature = auxCreature
+        for key in self.creatures.keys():
+            for auxCreature in self.creatures[key]:
+                if auxCreature.position.x == x and auxCreature.position.y == y:
+                    if creature is None or (
+                            (isinstance(creature, Hedge) or isinstance(creature, Sheep)) and isinstance(auxCreature,
+                                                                                                        Wolf)) or (
+                            isinstance(creature, Hedge) and isinstance(auxCreature, Sheep)):
+                        creature = auxCreature
         return creature
 
     # region Creature Functions
@@ -121,14 +123,32 @@ class Land:
         return near
 
     def getAllCreatureTypeInPosition(self, creatureType, position):
-        listCreatureType = self.getAllCreatureType(creatureType)
-        listAux = listCreatureType[:]
-        count = 0
-        for creature in listCreatureType:
-            if (position is creature.position) | (
-                    creature.position.x != position.x & creature.position.y != position.y):
-                listAux.pop()
-            count += 1
+        listCreaturePosition = self.creatures[self.getKey(position.x,position.y)]
+
+        listAux = listCreaturePosition[:]
+        for creature in listCreaturePosition:
+            if not isinstance(creature, creatureType):
+                listAux.remove(creature)
 
         return listAux
+
+    # endregion
+
+    # region Dictionary Functions
+    def getKey(self, x, y):
+        return str(x) + "," + str(y)
+
+    def intializeCreaturesLand(self, maxX, maxY):
+        dictAux = {}
+        for y in range(maxY):
+            for x in range(maxX):
+                dictAux.update({self.getKey(x, y): []})
+        return dictAux
+
+    def moveCreature(self, creature, newPosition):
+        creatureOldPositionList = self.creatures[self.getKey(creature.position.x, creature.position.y)]
+        creatureOldPositionList.remove(creature)
+        creatureNewPositionList = self.creatures[self.getKey(newPosition.x, newPosition.y)]
+        creatureNewPositionList.append(creature)
+
     # endregion

@@ -20,13 +20,16 @@ while iteration < config.MAX_ITERATIONS:
     vs.wait(config.DELAY_TIME)
 
     # move
-    for creature in land.creatures:
-        creature.removeLife(land)
-        creature.move(land)
+    for key in land.creatures:
+        for creature in land.creatures[key]:
+            life = creature.removeLife(land)
+            if life > 0:
+                creature.move(land)
 
     # eat creatures
-    for creature in land.creatures:
-        creature.eat(land)
+    for key in land.creatures:
+        for creature in land.creatures[key]:
+            creature.eat(land)
 
     # create hedge
     generateHedge(land)

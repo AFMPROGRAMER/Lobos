@@ -1,8 +1,8 @@
-MAX_X = 20  # Dimension x of the board
-MAX_Y = 20  # Dimension y of the board
+MAX_X = 50  # Dimension x of the board
+MAX_Y = 50  # Dimension y of the board
 MAX_LIFE = 10  # Number of movements before death
 MAX_TIME_HEDGE = 3  # Number of fallow iterations
-START_ANIMALS = 50  # Number of animals starting in the field
+START_ANIMALS = 500  # Number of animals starting in the field
 MAX_ITERATIONS = 100  # Number of movement iterations
 DELAY_TIME = 500  # Time between iterations
 COLOR_FONT = 25, 25, 25

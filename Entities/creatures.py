@@ -73,6 +73,7 @@ class Creatures:
             pos = self.position.moveON(land)
 
         land.footPrint(pos.x, pos.y)
+        land.moveCreature(self, pos)
         self.position = pos
         return pos
 
@@ -81,8 +82,6 @@ class Creatures:
     # region Life Functions
     def addLife(self):
         self.life = config.MAX_LIFE
-        # if auxLife <= config.MAX_LIFE:
-        #     self.life = auxLife
         return self.life
 
     def removeLife(self, land):
